@@ -377,7 +377,8 @@ class LinkedList:
     def reverse_between(self, m, n):
         if self.length <= 1:
             return
-        # Create a dummy node and set it before head
+        # Create a dummy node and set it to point to self.head - This dummy node will help when the section of the linked-list
+        # to be reversed starts from the head itself.
         dummy = Node(0)
         dummy.next = self.head
         front = dummy
