@@ -383,7 +383,7 @@ class LinkedList:
         dummy.next = self.head
         front = dummy
         for _ in range(m):
-            front = front.next
+            front = front.next # front is the node just before the start of the section to be reversed
         current = front.next # working node
         for _ in range(n - m):
             temp = current.next # node to be extracted (this becomes the next of the previous temp 
