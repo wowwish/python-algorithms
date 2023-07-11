@@ -8,7 +8,8 @@
 # In a Perfect Binary Tree, every node in every level of the Binary Tree has two children, except
 # the terminal child nodes.
 # A Complete Binary Tree will be filled from left to right, ie, the nodes in a level are filled from
-# left-right direction
+# left-right direction ie, for a node in a given level, its left child is filled first, followed by its 
+# right child with nodes in higher levels being filled first before the nodes in the lower levels.
 
 # A Binary Search Tree (BST) is a Binary Tree where the left Child should have a value less than the
 # Parent node and the right Child should have a value greater than the Parent node. For a given node
@@ -234,3 +235,146 @@ my_tree.recursive_insert(82)
 # print(my_tree.recursive_contains(82))
 print(my_tree.BFS())
 print(my_tree.dfs_in_order())
+
+
+
+
+
+# LC QUESTIONS
+
+
+
+"""
+1. You are tasked with writing a method called is_valid_bst in the BinarySearchTree class that checks 
+whether a binary search tree is a valid binary search tree.
+Your method should use the dfs_in_order method to get the node values of the binary search tree in 
+ascending order, and then check whether each node value is greater than the previous node value.
+If the node values are not sorted in ascending order, the method should return False, indicating that 
+the binary search tree is not valid.
+If all node values are sorted in ascending order, the method should return True, indicating that the 
+binary search tree is a valid binary search tree.
+"""
+
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, value):
+        new_node = Node(value)
+        if self.root is None:
+            self.root = new_node
+            return True
+        temp = self.root
+        while (True):
+            if new_node.value == temp.value:
+                return False
+            if new_node.value < temp.value:
+                if temp.left is None:
+                    temp.left = new_node
+                    return True
+                temp = temp.left
+            else: 
+                if temp.right is None:
+                    temp.right = new_node
+                    return True
+                temp = temp.right
+
+    def dfs_in_order(self):
+        results = []
+        def traverse(current_node):
+            if current_node.left is not None:
+                traverse(current_node.left)
+            results.append(current_node.value) 
+            if current_node.right is not None:
+                traverse(current_node.right)          
+        traverse(self.root)
+        return results
+        
+    def is_valid_bst(self):
+        result = self.dfs_in_order()
+        for i in range(1, len(result)):
+            if result[i - 1] > result[i]:
+                return False
+        return True
+    
+
+
+"""
+2. Given a binary search tree, find the kth smallest element in the tree. For example, if the tree 
+contains the elements [1, 2, 3, 4, 5], the 3rd smallest element would be 3.
+The solution to this problem usually involves traversing the tree in-order (left, root, right) and 
+keeping track of the number of nodes visited until you find the kth smallest element. There are two 
+main approaches to doing this:
+
+Iterative approach using a stack: This approach involves maintaining a stack of nodes that still need 
+to be visited, starting with the leftmost node. At each step, you pop a node off the stack, decrement 
+the kth smallest counter, and check whether you have found the kth smallest element. If you have not, 
+you continue traversing the tree by moving to the right child of the current node.
+
+Recursive approach: This approach involves recursively traversing the tree in-order and keeping track 
+of the number of nodes visited until you find the kth smallest element. You can use a helper function 
+that takes a node and a value of k as input, and recursively calls itself on the left and right 
+children of the node until it finds the kth smallest element.
+
+Both of these approaches have their own advantages and disadvantages, and the best approach to use may 
+depend on the specific problem constraints and the interviewer's preferences.
+"""
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, value):
+        new_node = Node(value)
+        if self.root is None:
+            self.root = new_node
+            return True
+        temp = self.root
+        while (True):
+            if new_node.value == temp.value:
+                return False
+            if new_node.value < temp.value:
+                if temp.left is None:
+                    temp.left = new_node
+                    return True
+                temp = temp.left
+            else: 
+                if temp.right is None:
+                    temp.right = new_node
+                    return True
+                temp = temp.right
+
+    
+    def kth_smallest(self, k):
+        stack = []
+        node = self.root
+        while stack or node:
+            # traverse to the left-most leaf node and start from there
+            while node:
+                stack.append(node)
+                node = node.left
+            # start from the leftmost leaf node and then
+            # keep going to the parent using the stack in subsequent iterations
+            node = stack.pop()
+            k -= 1
+            if k == 0: # When the k-th node is reached, return its value
+                return node.value
+            node = node.right # once the left node is checked,
+            # check the right node in the next iteration before going to the parent
+        return None # return None when k > number of nodes in tree
+
