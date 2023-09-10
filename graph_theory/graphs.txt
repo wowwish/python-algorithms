@@ -63,5 +63,67 @@ Representing Graphs:
     -   The implicit graph representation is a graph whose vertices or edges are not represented as 
         explicit objects in a computer's memory, but rather are determined algorithmically from some 
         more concise input.
+
+
+For any given Graph problem, you should ask yourself the following questions:
+    -   Is the graph directed or undirected ?
+    -   Are the edges of the graph weighted ?
+    -   Is the graph going to be dense with a lot of edges or sparse with less edges compared to nodes
+    -   Should I use an adjacency matrix, or an adjacency list, or an edge list, or some other structure
+        to represent the graph efficiently ?
     
-    
+
+The shortest path problem:
+Given a weighted graph, find the shortest path of edges from node A to node B ? 
+Algorithms: BFS (unweighted graph), Dijkstra's algorithm, Bellman-Ford, Floyd-Warshall, A* and much more
+
+Connectivity: 
+Does there exist a path between node A and node B ?
+Typical solution: use union find data structure or any search algorithm (eg. DFS)
+
+Negative Cycles:
+The presence of negative weighted edges in a graph cycle can cause graph algorithms like the shortest
+path finding algorithms to cycle endlessly in such cycles, minimizing the cost with every cycle. However,
+negative cycles can also be useful in certain scenarios such as currency arbitrage where one currency
+is traded for another currency at a particular time and then it is exchanged back to the original 
+currency at a time when the original currency's value is down. Thus, you can buy more original currencies
+than what you used up, leading to profits. 
+Typical Algorithms used to detect negative cycles: Bellman-Ford and Floyd-Warshall
+
+Strongly Connected Components:
+strongly connected components (SCCs) can be thought of as self-contained cycles within a DIRECTED GRAPH
+where every vertex in a given cyclical part of a graph can reach every other vertex in the same cycclical
+component of the directed graph.
+Algorithms used to find SCCs in directed graphs: Tarjan's and Kosaraju's algorithm
+
+Travelling Salesman Problem (TSP):
+Given a list of cities and the distances between each pair of cities, what is the shortest possible
+route that visits each city exactly once and returns to the origin city ? The TSP problem is NP-Hard,
+meaning it is a computationally challenging problem. This is unfortunate because the TSP has several 
+very important applications.
+Algorithms used to solve TSP: Held-Karp (dynamic programming), Branch and Bound and many approximation 
+algorithms such as ant-colony optimization.
+
+Finding Bridges:
+A bridge / cut edge is any edge in a graph whose removal increases the number of connected components. 
+Bridges are important in graph theory because they often hint at weak points, botlenecks or 
+vulnerabilities in a graph.
+
+Finding Articulation Points:
+An articulation point / cut vertex is any node in the graph whose removal increase the number of 
+connected components. Articulation points are important in graph theory because they often hint at weak 
+points, bottlenecks or vulnerabilities in a graph.
+
+Minimum Spanning Tree (MST):
+A minimum spanning tree (MST) is a subset of the edges of a connected, edge-weighted graph that connects
+all the vertices together, without any cycles and with the minimum possible total edge weight. Note that
+all MSTs of a graph have the same cost, but are not neccessarily identical. MSTs are seen in many
+applications including design of least cost network, circuit design, transportation networks etc.
+Algorithms used to find MST: Kruskal's, Prim's and Bruvka's algorithm
+
+Network Flow: max Flow
+With an infinite input source, how much "flow" can we push through the network ?
+Suppose the edges are roads with cars, pipes with water or hallways with people. Flow represents the
+volume of water allowed to flow through the pipes, the number of cars the roads can sustain in traffic
+and the maximum number of people that can navigate through the hallways.
+Algorithms for finding max flow: Ford-Fulkerson, Edmonds-Karp & Dinic's algorithm
