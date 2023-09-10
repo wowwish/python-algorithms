@@ -1,5 +1,5 @@
-# Stack is a data structure that follows first-in-first-out (FIFO)
-# Queue is a data structure that follows last-in-first-out (LIFO)
+# Stack is a data structure that follows last-in-first-out (LIFO)
+# Queue is a data structure that follows first-in-first-out (FIFO)
 
 # In Python, a list can be used as a stack. Such an implementation will only append and pop items
 # from the end of the list for efficiency (prevent re-indexing - O(1) time complexity). 
@@ -9,7 +9,7 @@
 # (prevent traversal). The "head" and "tail" of the linked-list are renamed as "top" and "bottom" 
 # (optional) when it is used as a stack.
 
-# A queue when implemented as a list inefficient (O(N) on one and and O(1) on other end in terms of 
+# A queue when implemented as a list is inefficient (O(N) on one and and O(1) on other end in terms of 
 # time complexity). A linked-list based implementation of queue is much more efficient with O(1) time
 # complexity for both "enqueue" (or addition) and "dequeue" (or removal) operations. Enqueue can be
 # performed at the end of the linked-list and Dequeue can be performed from the start of the list to
