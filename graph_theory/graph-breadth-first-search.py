@@ -76,7 +76,7 @@ function reconstructPath(s, e, prev):
 # whatever specialized graph algorithm to solve our problem such as: shortest path, connected components, etc... 
 # However, transformation between graph representations can usually be avoided due to the structure and
 # nature of a grid: we can move left, right, up and down from a cell in the middle of the grid to move
-# to adjacent cells. 
+# to adjacent cells.
 
 # Mathematically, from a cell at (r, c), we can access its four adjacent cells using Direction Vectors:
 # (r - 1, c), (r + 1, c), (r, c - 1) and (r, c + 1). If the problem you are trying to solve allows
@@ -144,10 +144,10 @@ R  2 | . | # | . | . | . | . | . |
 # visiting all the cells of the grid, leaving behind some unvisited cells!
 # Similar to BFS, we use a 2D prev matrix to generate the path by retracing our steps.
 # NOTE: BFS is only good for finding the shortest path in an unweighted graph. On a weighted
-# graph, a longer path may actually result in a shorter overall weight /value, while on an
+# graph, a longer path may actually result in a shorter overall weight/value, while on an
 # unweighted graph, all edges are assumed to be of constant value (ie, a weight of 1) so the
 # shortest path is guaranteed to be found. DFS can only find an arbitrary path between two
-# nodes on an unweighted graph and this path may not neccessarily be the shortest path. 
+# nodes on an unweighted graph and this path may not neccessarily be the shortest path.
 
 # ALTERNATIVE STATE REPRESENTATION:
 # So far, we have been storing the next x-y position in the queue as an (x, y) pair. This
@@ -164,13 +164,13 @@ PSEUDOCODE FOR THE DUNGEON PROBLEM:
 # Global/Class scope variables
 R, C = ... # R = number of Rows, C = number of Columns
 m = ... # Input character matrix of size R x C
-sr, sc = ... # row and column values for the cell with the 'S' symbol 
+sr, sc = ... # row and column values for the cell with the 'S' symbol
 rq, cq = ... # Empty Row Queue (RQ) and Column Queue (CQ)
 
 # Variables used to track the number of steps taken
 move_count = 0 # actually tracks the number of steps taken
 nodes_left_in_layer = 1 # tracks how many nodes we need to dequeue before taking a step
-nodes_in_next_layer = 0 # tracks how many nodes we added in the BFS expansion and is used to 
+nodes_in_next_layer = 0 # tracks how many nodes we added in the BFS expansion and is used to
 # update nodes_left_in_layer accordingly in the next iteration of BFS
 
 # Variable used to track whether the 'E' character ever gets reached during the BFS
@@ -188,7 +188,7 @@ function solve():
     rq.enqueue(sr)
     cq.enqueue(sc)
     visited[sr][sc] = true
-    
+
     # Perform iterative BFS until either the row queue or column queue is empty
     while rq.size() > 0: # or cq.size() > 0
         r = rq.dequeue()
@@ -214,7 +214,7 @@ function explore_neighbours(r, c):
         cc = c + dc[i]
 
         # Skip out of bounds locations
-        if rr < 0 orcc < 0: continue
+        if rr < 0 or cc < 0: continue
         if rr >= R or cc >= C: continue
 
         # Skip visited locations or blocked cells with rocks
